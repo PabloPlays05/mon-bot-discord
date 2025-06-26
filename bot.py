@@ -18,7 +18,7 @@ async def on_ready():
     print("✅ Le bot est prêt et connecté !")
 
     # Envoie un message de présence dans un salon spécifique
-    channel_id = 1365790616377757768  # ← Remplace avec l'ID de ton salon
+    channel_id = 1369266741288636527  # ← Remplace avec l'ID de ton salon
     channel = bot.get_channel(channel_id)
     if channel:
         await channel.send("🟢 **(Au boulot !)** Le bot est maintenant en ligne.")
