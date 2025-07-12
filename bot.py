@@ -90,8 +90,8 @@ async def on_voice_state_update(member, before, after):
         if member.voice and member.voice.channel == after.channel:
             # Vérifie qu'il est seul
             if len(after.channel.members) == 1:
-                # Vérifie qu'il n'est pas dans la blacklist
-                if member.id not in blacklist_users and not any(role.id in blacklist_roles for role in member.roles):
+                # Vérifie qu'il n'a pas un rôle blacklisté
+                if not any(role.id in blacklist_roles for role in member.roles):
                     try:
                         await member.move_to(None)  # Déconnexion du salon vocal
                         await member.send("👋 Tu as été retiré du salon vocal car tu y étais seul pendant 5 minutes.")
