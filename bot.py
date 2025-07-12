@@ -6,11 +6,16 @@ from PIL import Image, ImageDraw, ImageFont
 import aiohttp
 import io
 import os
+import asyncio
 
 intents = discord.Intents.default()
-intents.members = True  # Important pour on_member_join
+intents.members = True
+intents.voice_states = True  # Ajout pour suivre les salons vocaux
 
 bot = commands.Bot(command_prefix="!", intents=intents)
+
+# 🔒 Blacklist des rôles et utilisateurs à ignorer pour le kick vocal
+blacklist_roles = [1366128711786561747]  # ← Remplace par l'ID de ton rôle "Modérateur" par exemple
 
 @bot.event
 async def on_ready():
@@ -75,6 +80,24 @@ async def on_member_join(member):
 
     except Exception as e:
         print(f"💥 ERREUR : {e}")
+
+@bot.event
+async def on_voice_state_update(member, before, after):
+    if after.channel is not None and (before.channel != after.channel):
+        await asyncio.sleep(300)  # 5 minutes
+
+        # Vérifie que l'utilisateur est toujours dans le même salon
+        if member.voice and member.voice.channel == after.channel:
+            # Vérifie qu'il est seul
+            if len(after.channel.members) == 1:
+                # Vérifie qu'il n'est pas dans la blacklist
+                if member.id not in blacklist_users and not any(role.id in blacklist_roles for role in member.roles):
+                    try:
+                        await member.move_to(None)  # Déconnexion du salon vocal
+                        await member.send("👋 Tu as été retiré du salon vocal car tu y étais seul pendant 5 minutes.")
+                        print(f"🔕 {member.name} déconnecté pour inactivité vocale.")
+                    except Exception as e:
+                        print(f"⚠️ Erreur lors de la déconnexion vocale : {e}")
 
 # Lancer le bot
 bot.run(os.environ['DISCORD_TOKEN'])
