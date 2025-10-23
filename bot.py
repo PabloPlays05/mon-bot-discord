@@ -7,7 +7,6 @@ import aiohttp
 import io
 import os
 import asyncio
-from datetime import datetime  # ← Ajouté pour gérer les dates
 
 intents = discord.Intents.default()
 intents.members = True
@@ -40,20 +39,8 @@ async def on_member_join(member):
             async with session.get(str(member.display_avatar.url)) as resp:
                 avatar_bytes = await resp.read()
 
-        # 🔹 Choix du background selon la date
-        today = datetime(2025, 11, 15)  # Simule le 15 octobre
-        month = today.month
-        day = today.day
-
-        if month == 10 and 1 <= day <= 31:  # Halloween
-            bg_file = "background2.png"
-        elif month == 12 and 1 <= day <= 31:  # Noël
-            bg_file = "background3.png"
-        else:  # Basique
-            bg_file = "background.png"
-
-        # Charger l'image de fond choisie
-        background = Image.open(bg_file).convert("RGBA")
+        # Charger l'image de fond
+        background = Image.open("background.png").convert("RGBA")
         background = background.resize((800, 250))
 
         # Avatar en cercle
@@ -76,7 +63,7 @@ async def on_member_join(member):
 
         # Texte de bienvenue
         draw_text_with_shadow(draw, (250, 50), f"Bienvenue {member.name} !", font_title)
-        draw_text_with_shadow(draw, (250, 120), "Sur Les Mains Tendues ", font_small)
+        draw_text_with_shadow(draw, (250, 120), "Sur Les Mains Tendues !", font_small)
 
         # Envoyer l’image dans le salon
         with io.BytesIO() as image_binary:
@@ -84,7 +71,7 @@ async def on_member_join(member):
             image_binary.seek(0)
             if channel:
                 await channel.send(
-                    content=f"🎉 Bienvenue {member.mention} sur **{member.guild.name}** !",
+                    content=f"🎉 Bienvenue {member.mention} sur **{member.guild.name}** ",
                     file=discord.File(fp=image_binary, filename="welcome.png")
                 )
                 print("✅ Image envoyée !")
