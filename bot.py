@@ -7,6 +7,7 @@ import aiohttp
 import io
 import os
 import asyncio
+from datetime import datetime  # ← Ajouté pour gérer les dates
 
 intents = discord.Intents.default()
 intents.members = True
@@ -39,8 +40,20 @@ async def on_member_join(member):
             async with session.get(str(member.display_avatar.url)) as resp:
                 avatar_bytes = await resp.read()
 
-        # Charger l'image de fond
-        background = Image.open("background.png").convert("RGBA")
+        # 🔹 Choix du background selon la date
+        today = datetime(2025, 11, 15)  # Simule le 15 octobre
+        month = today.month
+        day = today.day
+
+        if month == 10 and 1 <= day <= 31:  # Halloween
+            bg_file = "background2.png"
+        elif month == 12 and 1 <= day <= 31:  # Noël
+            bg_file = "background3.png"
+        else:  # Basique
+            bg_file = "background.png"
+
+        # Charger l'image de fond choisie
+        background = Image.open(bg_file).convert("RGBA")
         background = background.resize((800, 250))
 
         # Avatar en cercle
