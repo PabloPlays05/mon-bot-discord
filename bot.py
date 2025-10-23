@@ -63,7 +63,7 @@ async def on_member_join(member):
 
         # Texte de bienvenue
         draw_text_with_shadow(draw, (250, 50), f"Bienvenue {member.name} !", font_title)
-        draw_text_with_shadow(draw, (250, 120), "Sur Les Mains Tendues !", font_small)
+        draw_text_with_shadow(draw, (250, 120), "Sur Les Mains Tendues ", font_small)
 
         # Envoyer l’image dans le salon
         with io.BytesIO() as image_binary:
