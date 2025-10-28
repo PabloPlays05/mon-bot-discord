@@ -81,23 +81,5 @@ async def on_member_join(member):
     except Exception as e:
         print(f"💥 ERREUR : {e}")
 
-@bot.event
-async def on_voice_state_update(member, before, after):
-    if after.channel is not None and (before.channel != after.channel):
-        await asyncio.sleep(300)  # 5 minutes
-
-        # Vérifie que l'utilisateur est toujours dans le même salon
-        if member.voice and member.voice.channel == after.channel:
-            # Vérifie qu'il est seul
-            if len(after.channel.members) == 1:
-                # Vérifie qu'il n'a pas un rôle blacklisté
-                if not any(role.id in blacklist_roles for role in member.roles):
-                    try:
-                        await member.move_to(None)  # Déconnexion du salon vocal
-                        await member.send("👋 Tu as été retiré du salon vocal car tu y étais seul pendant 5 minutes.")
-                        print(f"🔕 {member.name} déconnecté pour inactivité vocale.")
-                    except Exception as e:
-                        print(f"⚠️ Erreur lors de la déconnexion vocale : {e}")
-
 # Lancer le bot
 bot.run(os.environ['DISCORD_TOKEN'])
