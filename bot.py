@@ -81,5 +81,89 @@ async def on_member_join(member):
     except Exception as e:
         print(f"💥 ERREUR : {e}")
 
+# ================= COMMANDES PERSONNALISÉES =================
+
+@bot.command()
+async def youtube(ctx):
+    await ctx.send("📌Mon YouTube se trouve ici : https://beacons.ai/pablo_plays__")
+
+@bot.command()
+async def tiktok(ctx):
+    await ctx.send("📌Mon TikTok se trouve ici : https://beacons.ai/pablo_plays__")
+
+@bot.command()
+async def lanterne(ctx):
+    await ctx.send("Le TikTok pour la lanterne🏮: https://vm.tiktok.com/ZNd64Wuoh/ ")
+
+@bot.command()
+async def cabestan(ctx):
+    await ctx.send("Le TikTok pour le cabestan ⚓️: https://vm.tiktok.com/ZNdMRmBsf/")
+
+@bot.command()
+async def skin(ctx):
+    await ctx.send("Le TikTok pour mon skin 🤡: https://vm.tiktok.com/ZNdkoMK9v/")
+
+@bot.command()
+async def doublons(ctx):
+    await ctx.send("Le TikTok pour farm les doublons 🔵: https://vm.tiktok.com/ZNdjEsU7h/")
+
+@bot.command()
+async def tromblon(ctx):
+    await ctx.send("Le TikTok pour le tromblon doré 🔫: https://vm.tiktok.com/ZNdMrH4Lr/")
+
+@bot.command()
+async def legende(ctx):
+    await ctx.send("Tuto pour monter Pirate Légende 🩵: https://vm.tiktok.com/ZNdUTe492/")
+
+@bot.command()
+async def ancien(ctx):
+    await ctx.send("Le TikTok pour l'opti des squel anciens 🧿: https://vm.tiktok.com/ZNd566mvy/")
+
+@bot.command()
+async def miles(ctx):
+    await ctx.send("Le TikTok pour les miles 🗺️: https://vm.tiktok.com/ZNdBuRGuL/")
+
+@bot.command()
+async def coque(ctx):
+    await ctx.send("Le TikTok pour la coque bleue ⛵️: https://vm.tiktok.com/ZNdaraq5q/")
+
+@bot.command()
+async def emissaire(ctx):
+    await ctx.send("Le TikTok pour les avantages des émissaires 5 🚩: https://vm.tiktok.com/ZNdnKBg4Y/")
+
+@bot.command()
+async def rabais(ctx):
+    await ctx.send("Le TikTok pour les rabais des SeaPosts 💰: https://vm.tiktok.com/ZNR181weQ/")
+
+@bot.command()
+async def blackscreen(ctx):
+    await ctx.send("Le TikTok sur les blackscreen 🔳: https://vm.tiktok.com/ZNRL1vwQx/")
+
+@bot.command()
+async def capitaine(ctx):
+    await ctx.send("Le TikTok pour l'opti capitaine 💀: https://vm.tiktok.com/ZNRjCK3wJ/")
+
+@bot.command()
+async def r4(ctx):
+    await ctx.send("Le TikTok pour monter R4 en 1 minutes 🚩: https://vm.tiktok.com/ZNRry1cVe/")
+
+@bot.command()
+async def lmt(ctx):
+    await ctx.send("📌Le TikTok LMT se trouve ici : https://www.tiktok.com/@lesmainstendues")
+
+@bot.command()
+async def playstv(ctx):
+    await ctx.send("📌Mon TikTok de clips se trouve ici : https://www.tiktok.com/@pabloplaystv")
+
+@bot.command()
+async def couteaux(ctx):
+    await ctx.send("Le TikTok pour l'arme la plus opti en PVE 🔪: https://vm.tiktok.com/ZNRDWEEt8/")
+
+@bot.command()
+async def meg(ctx):
+    await ctx.send("Le TikTok pour les megalodons 🦈 : https://vm.tiktok.com/ZNRUWm2un/")
+
+# ============================================================
+
 # Lancer le bot
 bot.run(os.environ['DISCORD_TOKEN'])
