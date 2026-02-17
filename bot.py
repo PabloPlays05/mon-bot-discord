@@ -168,7 +168,7 @@ async def meg(ctx):
 # ================= Gestion musique attente =================
 
 ATTENTE_CHANNEL_ID = 1369367264587153488  # ID du salon vocal "attente move"
-LIVE_CHANNEL_ID = 136xxxxxxx  # Ton salon live où tu déplaces la personne
+LIVE_CHANNEL_ID = 1365849681451548712  # Ton salon live où tu déplaces la personne
 MUSIQUE_ATTENTE = "musique_attente.mp3"  # fichier mp3 local ou lien ffmpeg
 
 voice_client = None  # variable pour garder la connexion du bot au vocal
