@@ -184,14 +184,17 @@ async def on_voice_state_update(member, before, after):
         # --- Quelqu'un rejoint le salon d'attente ---
         if after.channel and after.channel.id == ATTENTE_CHANNEL_ID:
             if not musique_en_cours:
-                await salon_commande.send(f"!play {MUSIQUE_ATTENTE}")
-                musique_en_cours = True  # on marque que la musique est lancée
+                await salon_commande.send(f"m!play {MUSIQUE_ATTENTE}")
+                musique_en_cours = True  # marque que la musique est lancée
 
-        # --- Quelqu'un quitte le salon d'attente ---
+        # --- Quelqu'un quitte ou est déplacé du salon d'attente ---
         if before.channel and before.channel.id == ATTENTE_CHANNEL_ID:
-            if len(before.channel.members) == 0:
-                await salon_commande.send("!leave")
+            membres = before.channel.members
+            # Si le salon passe de 2 à 1 (le bot musique restant)
+            if len(membres) == 1:
+                await salon_commande.send("m!leave")
                 musique_en_cours = False  # reset pour la prochaine personne
+
     except Exception as e:
         print(f"💥 ERREUR voiceStateUpdate : {e}")
 
