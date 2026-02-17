@@ -166,27 +166,26 @@ async def meg(ctx):
 
 # ================= Gestion musique attente =================
 
-ATTENTE_CHANNEL_ID = 1369367264587153488  # ← Remplace par l'ID de ton salon vocal "attente move"
-SALON_COMMANDE_ID = 1369266741288636527  # ← ID du salon texte privé où le bot musique écoute les commandes
-MUSIQUE_ATTENTE = "https://www.youtube.com/watch?v=bAVTn14kdyg"  # ← lien de la musique d'attente
-
 @bot.event
 async def on_voice_state_update(member, before, after):
     try:
+	ATTENTE_CHANNEL_ID = 1369367264587153488  # ← Remplace par l'ID de ton salon vocal "attente move"
+	SALON_COMMANDE_ID = 1369266741288636527  # ← ID du salon texte privé où le bot musique écoute les commandes
+	MUSIQUE_ATTENTE = "https://www.youtube.com/watch?v=bAVTn14kdyg"  # ← lien de la musique d'attente
+
         salon_commande = bot.get_channel(SALON_COMMANDE_ID)
         if not salon_commande:
             return
 
         # --- Quelqu'un rejoint le salon d'attente ---
-        if not before.channel and after.channel and after.channel.id == ATTENTE_CHANNEL_ID:
-            # Si c'est le premier membre du salon d'attente, lancer la musique
-            if len(after.channel.members) == 1:
-                await salon_commande.send(f"!play {MUSIQUE_ATTENTE}")
+        if (after.channel and after.channel.id == ATTENTE_CHANNEL_ID and (not before.channel or before.channel.id != ATTENTE_CHANNEL_ID)):
+            print(f"➡️ {member} a rejoint le salon attente")
+            await salon_commande.send(f"!play {MUSIQUE_ATTENTE}")
 
         # --- Quelqu'un quitte le salon d'attente ---
-        if before.channel and before.channel.id == ATTENTE_CHANNEL_ID:
-            # Si le salon est maintenant vide, faire leave
+        if (before.channel and before.channel.id == ATTENTE_CHANNEL_ID):
             if len(before.channel.members) == 0:
+                print("⏹️ Salon attente vide, !leave")
                 await salon_commande.send("!leave")
 
     except Exception as e:
