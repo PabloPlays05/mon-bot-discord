@@ -7,7 +7,6 @@ import aiohttp
 import io
 import os
 import asyncio
-from discord import FFmpegPCMAudio  # ← ajouté pour la musique
 
 intents = discord.Intents.default()
 intents.members = True
@@ -166,38 +165,6 @@ async def meg(ctx):
     await ctx.send("Le TikTok pour les megalodons 🦈 : https://vm.tiktok.com/ZNRUWm2un/")
 
 # ================= Gestion musique attente =================
-
-ATTENTE_CHANNEL_ID = 1369367264587153488  # ID du salon vocal "attente move"
-LIVE_CHANNEL_ID = 1365849681451548712  # Ton salon live où tu déplaces la personne
-MUSIQUE_ATTENTE = "musique_attente.mp3"  # fichier mp3 local ou lien ffmpeg
-
-voice_client = None  # variable pour garder la connexion du bot au vocal
-
-@bot.event
-async def on_voice_state_update(member, before, after):
-    global voice_client
-    try:
-        # --- Quelqu'un rejoint le salon d'attente ---
-        if after.channel and after.channel.id == ATTENTE_CHANNEL_ID:
-            # Si le bot n'est pas déjà dans le salon
-            if not voice_client or not voice_client.is_connected():
-                voice_client = await after.channel.connect()
-                voice_client.play(discord.FFmpegPCMAudio(MUSIQUE_ATTENTE), after=lambda e: print("🎵 Musique terminée"))
-                print(f"🎵 Musique lancée dans {after.channel.name}")
-
-        # --- Quelqu'un quitte ou est déplacé du salon d'attente ---
-        if before.channel and before.channel.id == ATTENTE_CHANNEL_ID:
-            members = before.channel.members
-            # Si le salon devient vide ou que la personne est déplacée dans le live
-            if len(members) == 0 or (after.channel and after.channel.id == LIVE_CHANNEL_ID):
-                if voice_client and voice_client.is_connected():
-                    await voice_client.disconnect()
-                    voice_client = None
-                    print("⏹️ Musique arrêtée et bot quitté du vocal")
-
-    except Exception as e:
-        print(f"💥 ERREUR voiceStateUpdate : {e}")
-# ============================================================
 
 # Lancer le bot
 bot.run(os.environ['DISCORD_TOKEN'])
