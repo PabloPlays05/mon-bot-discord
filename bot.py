@@ -7,6 +7,7 @@ import aiohttp
 import io
 import os
 import asyncio
+from discord import FFmpegPCMAudio  # ← ajouté pour la musique
 
 intents = discord.Intents.default()
 intents.members = True
@@ -167,37 +168,35 @@ async def meg(ctx):
 # ================= Gestion musique attente =================
 
 ATTENTE_CHANNEL_ID = 1369367264587153488  # ID du salon vocal "attente move"
-SALON_COMMANDE_ID = 1369266741288636527  # ID du salon texte privé où le bot musique écoute les commandes
-MUSIQUE_ATTENTE = "https://www.youtube.com/watch?v=bAVTn14kdyg"  # lien de la musique d'attente
+LIVE_CHANNEL_ID = 136xxxxxxx  # Ton salon live où tu déplaces la personne
+MUSIQUE_ATTENTE = "musique_attente.mp3"  # fichier mp3 local ou lien ffmpeg
 
-# Flag pour éviter de spammer !play si plusieurs membres rejoignent en même temps
-musique_en_cours = False
+voice_client = None  # variable pour garder la connexion du bot au vocal
 
 @bot.event
 async def on_voice_state_update(member, before, after):
-    global musique_en_cours
+    global voice_client
     try:
-        salon_commande = bot.get_channel(SALON_COMMANDE_ID)
-        if not salon_commande:
-            return
-
         # --- Quelqu'un rejoint le salon d'attente ---
         if after.channel and after.channel.id == ATTENTE_CHANNEL_ID:
-            if not musique_en_cours:
-                await salon_commande.send(f"m!play {MUSIQUE_ATTENTE}")
-                musique_en_cours = True  # marque que la musique est lancée
+            # Si le bot n'est pas déjà dans le salon
+            if not voice_client or not voice_client.is_connected():
+                voice_client = await after.channel.connect()
+                voice_client.play(discord.FFmpegPCMAudio(MUSIQUE_ATTENTE), after=lambda e: print("🎵 Musique terminée"))
+                print(f"🎵 Musique lancée dans {after.channel.name}")
 
         # --- Quelqu'un quitte ou est déplacé du salon d'attente ---
         if before.channel and before.channel.id == ATTENTE_CHANNEL_ID:
-            membres = before.channel.members
-            # Si le salon passe de 2 à 1 (le bot musique restant)
-            if len(membres) == 1:
-                await salon_commande.send("m!leave")
-                musique_en_cours = False  # reset pour la prochaine personne
+            members = before.channel.members
+            # Si le salon devient vide ou que la personne est déplacée dans le live
+            if len(members) == 0 or (after.channel and after.channel.id == LIVE_CHANNEL_ID):
+                if voice_client and voice_client.is_connected():
+                    await voice_client.disconnect()
+                    voice_client = None
+                    print("⏹️ Musique arrêtée et bot quitté du vocal")
 
     except Exception as e:
         print(f"💥 ERREUR voiceStateUpdate : {e}")
-
 # ============================================================
 
 # Lancer le bot
