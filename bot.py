@@ -146,7 +146,7 @@ async def capitaine(ctx):
 
 @bot.command()
 async def r4(ctx):
-    await ctx.send("Le TikTok pour monter R4 en 1 minutes 🚩: https://vm.tiktok.com/ZNRry1cVe/")
+    await ctx.send("Le TikTok pour monter R4 en 1 minute 🚩: https://vm.tiktok.com/ZNRry1cVe/")
 
 @bot.command()
 async def lmt(ctx):
@@ -163,6 +163,34 @@ async def couteaux(ctx):
 @bot.command()
 async def meg(ctx):
     await ctx.send("Le TikTok pour les megalodons 🦈 : https://vm.tiktok.com/ZNRUWm2un/")
+
+# ================= Gestion musique attente =================
+
+ATTENTE_CHANNEL_ID = 1369367264587153488  # ← Remplace par l'ID de ton salon vocal "attente move"
+SALON_COMMANDE_ID = 1369266741288636527  # ← ID du salon texte privé où le bot musique écoute les commandes
+MUSIQUE_ATTENTE = "https://www.youtube.com/watch?v=bAVTn14kdyg"  # ← lien de la musique d'attente
+
+@bot.event
+async def on_voice_state_update(member, before, after):
+    try:
+        salon_commande = bot.get_channel(SALON_COMMANDE_ID)
+        if not salon_commande:
+            return
+
+        # --- Quelqu'un rejoint le salon d'attente ---
+        if not before.channel and after.channel and after.channel.id == ATTENTE_CHANNEL_ID:
+            # Si c'est le premier membre du salon d'attente, lancer la musique
+            if len(after.channel.members) == 1:
+                await salon_commande.send(f"!play {MUSIQUE_ATTENTE}")
+
+        # --- Quelqu'un quitte le salon d'attente ---
+        if before.channel and before.channel.id == ATTENTE_CHANNEL_ID:
+            # Si le salon est maintenant vide, faire leave
+            if len(before.channel.members) == 0:
+                await salon_commande.send("!leave")
+
+    except Exception as e:
+        print(f"💥 ERREUR voiceStateUpdate : {e}")
 
 # ============================================================
 
