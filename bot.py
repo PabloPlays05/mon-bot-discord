@@ -166,28 +166,32 @@ async def meg(ctx):
 
 # ================= Gestion musique attente =================
 
+ATTENTE_CHANNEL_ID = 1369367264587153488  # ID du salon vocal "attente move"
+SALON_COMMANDE_ID = 1369266741288636527  # ID du salon texte privé où le bot musique écoute les commandes
+MUSIQUE_ATTENTE = "https://www.youtube.com/watch?v=bAVTn14kdyg"  # lien de la musique d'attente
+
+# Flag pour éviter de spammer !play si plusieurs membres rejoignent en même temps
+musique_en_cours = False
+
 @bot.event
 async def on_voice_state_update(member, before, after):
+    global musique_en_cours
     try:
-	ATTENTE_CHANNEL_ID = 1369367264587153488  # ← Remplace par l'ID de ton salon vocal "attente move"
-	SALON_COMMANDE_ID = 1369266741288636527  # ← ID du salon texte privé où le bot musique écoute les commandes
-	MUSIQUE_ATTENTE = "https://www.youtube.com/watch?v=bAVTn14kdyg"  # ← lien de la musique d'attente
-
         salon_commande = bot.get_channel(SALON_COMMANDE_ID)
         if not salon_commande:
             return
 
         # --- Quelqu'un rejoint le salon d'attente ---
-        if (after.channel and after.channel.id == ATTENTE_CHANNEL_ID and (not before.channel or before.channel.id != ATTENTE_CHANNEL_ID)):
-            print(f"➡️ {member} a rejoint le salon attente")
-            await salon_commande.send(f"!play {MUSIQUE_ATTENTE}")
+        if after.channel and after.channel.id == ATTENTE_CHANNEL_ID:
+            if not musique_en_cours:
+                await salon_commande.send(f"!play {MUSIQUE_ATTENTE}")
+                musique_en_cours = True  # on marque que la musique est lancée
 
         # --- Quelqu'un quitte le salon d'attente ---
-        if (before.channel and before.channel.id == ATTENTE_CHANNEL_ID):
+        if before.channel and before.channel.id == ATTENTE_CHANNEL_ID:
             if len(before.channel.members) == 0:
-                print("⏹️ Salon attente vide, !leave")
                 await salon_commande.send("!leave")
-
+                musique_en_cours = False  # reset pour la prochaine personne
     except Exception as e:
         print(f"💥 ERREUR voiceStateUpdate : {e}")
 
