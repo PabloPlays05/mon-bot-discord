@@ -20,7 +20,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 blacklist_roles = [1366128711786561747]
 
 # 🎯 CONFIG REACTION ROLE
-CHANNEL_ID = 1365829812253626429
+CHANNEL_ID = 1382468191908794539
 ROLE_ID = 1488970626222919740
 EMOJI = "🎟️"
 
@@ -91,7 +91,94 @@ async def youtube(ctx):
 async def tiktok(ctx):
     await ctx.send("📌Mon TikTok se trouve ici : https://beacons.ai/pablo_plays__")
 
-# (je raccourcis ici, tes autres commandes restent identiques)
+@bot.command()
+async def lanterne(ctx):
+    await ctx.send("Le TikTok pour la lanterne🏮: https://vm.tiktok.com/ZNd64Wuoh/ ")
+
+@bot.command()
+async def cabestan(ctx):
+    await ctx.send("Le TikTok pour le cabestan ⚓️: https://vm.tiktok.com/ZNdMRmBsf/")
+
+@bot.command()
+async def skin(ctx):
+    await ctx.send("Le TikTok pour mon skin 🤡: https://vm.tiktok.com/ZNdkoMK9v/")
+
+@bot.command()
+async def doublons(ctx):
+    await ctx.send("Le TikTok pour farm les doublons 🔵: https://vm.tiktok.com/ZNdjEsU7h/")
+
+@bot.command()
+async def tromblon(ctx):
+    await ctx.send("Le TikTok pour le tromblon doré 🔫: https://vm.tiktok.com/ZNdMrH4Lr/")
+
+@bot.command()
+async def legende(ctx):
+    await ctx.send("Tuto pour monter Pirate Légende 🩵: https://vm.tiktok.com/ZNdUTe492/")
+
+@bot.command()
+async def ancien(ctx):
+    await ctx.send("Le TikTok pour l'opti des squel anciens 🧿: https://vm.tiktok.com/ZNd566mvy/")
+
+@bot.command()
+async def miles(ctx):
+    await ctx.send("Le TikTok pour les miles 🗺️: https://vm.tiktok.com/ZNdBuRGuL/")
+
+@bot.command()
+async def coque(ctx):
+    await ctx.send("Le TikTok pour la coque bleue ⛵️: https://vm.tiktok.com/ZNdaraq5q/")
+
+@bot.command()
+async def emissaire5(ctx):
+    await ctx.send("Le TikTok pour les avantages des émissaires 5 🚩: https://vm.tiktok.com/ZNdnKBg4Y/")
+
+@bot.command()
+async def rabais(ctx):
+    await ctx.send("Le TikTok pour les rabais des SeaPosts 💰: https://vm.tiktok.com/ZNR181weQ/")
+
+@bot.command()
+async def blackscreen(ctx):
+    await ctx.send("Le TikTok sur les blackscreen 🔳: https://vm.tiktok.com/ZNRL1vwQx/")
+
+@bot.command()
+async def capitaine(ctx):
+    await ctx.send("Le TikTok pour l'opti capitaine 💀: https://vm.tiktok.com/ZNRjCK3wJ/")
+
+@bot.command()
+async def r4(ctx):
+    await ctx.send("[PATCH] Le TikTok pour monter R4 en 1 minute 🚩: https://vm.tiktok.com/ZNRry1cVe/")
+
+@bot.command()
+async def lmt(ctx):
+    await ctx.send("📌Le TikTok LMT se trouve ici : https://www.tiktok.com/@lesmainstendues")
+
+@bot.command()
+async def playstv(ctx):
+    await ctx.send("📌Mon TikTok de clips se trouve ici : https://www.tiktok.com/@pabloplaystv")
+
+@bot.command()
+async def couteaux(ctx):
+    await ctx.send("Le TikTok pour l'arme la plus opti en PVE 🔪: https://vm.tiktok.com/ZNRDWEEt8/")
+
+@bot.command()
+async def meg(ctx):
+    await ctx.send("Le TikTok pour les megalodons 🦈 : https://vm.tiktok.com/ZNRUWm2un/")
+
+@bot.command()
+async def emissaires(ctx):
+    await ctx.send("Le TikTok pour reconnaître les émissaires 🚩: https://vm.tiktok.com/ZNRQVmrh3/")
+
+@bot.command()
+async def barons(ctx):
+    await ctx.send("Le TikTok pour les abrons ⚓️: https://vm.tiktok.com/ZNRf9EcDg/")
+
+@bot.command()
+async def rituel(ctx):
+    await ctx.send("Le TikTok pour les rituels x3 🔮: https://vm.tiktok.com/ZNRa7M32u/")
+
+@bot.command()
+async def barre(ctx):
+    await ctx.send("Le TikTok pour faire des lignes droites à la barre 🛞: https://vm.tiktok.com/ZNRHFKx2N/")
+
 
 # ================= REACTION ROLE =================
 
