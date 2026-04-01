@@ -21,6 +21,7 @@ blacklist_roles = [1366128711786561747]
 
 # 🎯 CONFIG REACTION ROLE
 CHANNEL_ID = 1382468191908794539
+CHANNEL_ID1 = 1463870463158648916
 ROLE_ID = 1488970626222919740
 EMOJI = "🎟️"
 EMOJI1 = "🍌"
@@ -218,7 +219,7 @@ async def on_raw_reaction_add(payload):
 @bot.event
 async def on_raw_reaction_add(payload):
     # ✅ Vérifie le bon salon
-    if payload.channel_id != 1463870463158648916:
+    if payload.channel_id != CHANNEL_ID1:
         return
 
     # ✅ Vérifie le bon emoji
@@ -240,7 +241,7 @@ async def on_raw_reaction_add(payload):
 @bot.event
 async def on_raw_reaction_add(payload):
     # ✅ Vérifie le bon salon
-    if payload.channel_id != 1463870463158648916:
+    if payload.channel_id != CHANNEL_ID1:
         return
 
     # ✅ Vérifie le bon emoji
@@ -262,7 +263,7 @@ async def on_raw_reaction_add(payload):
 @bot.event
 async def on_raw_reaction_add(payload):
     # ✅ Vérifie le bon salon
-    if payload.channel_id != 1463870463158648916:
+    if payload.channel_id != CHANNEL_ID1:
         return
 
     # ✅ Vérifie le bon emoji
@@ -284,7 +285,7 @@ async def on_raw_reaction_add(payload):
 @bot.event
 async def on_raw_reaction_add(payload):
     # ✅ Vérifie le bon salon
-    if payload.channel_id != 1463870463158648916:
+    if payload.channel_id != CHANNEL_ID1:
         return
 
     # ✅ Vérifie le bon emoji
