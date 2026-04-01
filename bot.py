@@ -213,6 +213,94 @@ async def on_raw_reaction_add(payload):
     else:
         print("❌ Rôle introuvable")
 
+# ================= REACTION ROLE Livraisons =================
+
+@bot.event
+async def on_raw_reaction_add(payload):
+    # ✅ Vérifie le bon salon
+    if payload.channel_id != 1463870463158648916:
+        return
+
+    # ✅ Vérifie le bon emoji
+    if str(payload.emoji) != EMOJI1:
+        return
+
+    guild = bot.get_guild(payload.guild_id)
+
+    # ✅ Sécurisé (évite bug cache)
+    member = guild.get_member(payload.user_id) or await guild.fetch_member(payload.user_id)
+
+    # Ignore les bots
+    if member.bot:
+        return
+
+    role = guild.get_role(1463868964856660134)
+
+
+@bot.event
+async def on_raw_reaction_add(payload):
+    # ✅ Vérifie le bon salon
+    if payload.channel_id != 1463870463158648916:
+        return
+
+    # ✅ Vérifie le bon emoji
+    if str(payload.emoji) != EMOJI2:
+        return
+
+    guild = bot.get_guild(payload.guild_id)
+
+    # ✅ Sécurisé (évite bug cache)
+    member = guild.get_member(payload.user_id) or await guild.fetch_member(payload.user_id)
+
+    # Ignore les bots
+    if member.bot:
+        return
+
+    role = guild.get_role(1463869160302973054)
+
+
+@bot.event
+async def on_raw_reaction_add(payload):
+    # ✅ Vérifie le bon salon
+    if payload.channel_id != 1463870463158648916:
+        return
+
+    # ✅ Vérifie le bon emoji
+    if str(payload.emoji) != EMOJI3:
+        return
+
+    guild = bot.get_guild(payload.guild_id)
+
+    # ✅ Sécurisé (évite bug cache)
+    member = guild.get_member(payload.user_id) or await guild.fetch_member(payload.user_id)
+
+    # Ignore les bots
+    if member.bot:
+        return
+
+    role = guild.get_role(1463869222051516428)
+
+
+@bot.event
+async def on_raw_reaction_add(payload):
+    # ✅ Vérifie le bon salon
+    if payload.channel_id != 1463870463158648916:
+        return
+
+    # ✅ Vérifie le bon emoji
+    if str(payload.emoji) != EMOJI4:
+        return
+
+    guild = bot.get_guild(payload.guild_id)
+
+    # ✅ Sécurisé (évite bug cache)
+    member = guild.get_member(payload.user_id) or await guild.fetch_member(payload.user_id)
+
+    # Ignore les bots
+    if member.bot:
+        return
+
+    role = guild.get_role(1463869350258675845)
 
 # ================= LANCEMENT =================
 
