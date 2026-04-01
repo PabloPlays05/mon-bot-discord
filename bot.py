@@ -235,11 +235,6 @@ async def on_raw_reaction_add(payload):
 
     role = guild.get_role(1463868964856660134)
 
-    if role:
-        await member.add_roles(role)
-        print(f"✅ Rôle ajouté à {member}")
-    else:
-        print("❌ Rôle introuvable")
 
 @bot.event
 async def on_raw_reaction_add(payload):
@@ -262,11 +257,6 @@ async def on_raw_reaction_add(payload):
 
     role = guild.get_role(1463869160302973054)
 
-    if role:
-        await member.add_roles(role)
-        print(f"✅ Rôle ajouté à {member}")
-    else:
-        print("❌ Rôle introuvable")
 
 @bot.event
 async def on_raw_reaction_add(payload):
@@ -289,11 +279,6 @@ async def on_raw_reaction_add(payload):
 
     role = guild.get_role(1463869222051516428)
 
-    if role:
-        await member.add_roles(role)
-        print(f"✅ Rôle ajouté à {member}")
-    else:
-        print("❌ Rôle introuvable")
 
 @bot.event
 async def on_raw_reaction_add(payload):
@@ -316,11 +301,6 @@ async def on_raw_reaction_add(payload):
 
     role = guild.get_role(1463869350258675845)
 
-    if role:
-        await member.add_roles(role)
-        print(f"✅ Rôle ajouté à {member}")
-    else:
-        print("❌ Rôle introuvable")
 
 # ================= LANCEMENT =================
 
