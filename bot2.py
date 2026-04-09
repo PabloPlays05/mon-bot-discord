@@ -58,7 +58,7 @@ async def on_member_join(member):
             draw_obj.text((x, y), text, font=font, fill=fill)
 
         draw_text_with_shadow(draw, (250, 50), f"Bienvenue {member.name} !", font_title)
-        draw_text_with_shadow(draw, (250, 120), "Sur le Guide du Flibusier !", font_small)
+        draw_text_with_shadow(draw, (250, 120), "Sur le Guide du Flibustier !", font_small)
 
         with io.BytesIO() as image_binary:
             background.save(image_binary, "PNG")
