@@ -17,19 +17,13 @@ intents.reactions = True  # ✅ IMPORTANT
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # 🔒 Blacklist des rôles et utilisateurs à ignorer pour le kick vocal
-blacklist_roles = [1366128711786561747]
-
-# 🎯 CONFIG REACTION ROLE
-CHANNEL_ID = 1382468191908794539
-ROLE_ID = 1488970626222919740
-EMOJI = "🎟️"
 
 @bot.event
 async def on_ready():
     print(f"🤖 Bot connecté en tant que {bot.user}")
     print("✅ Le bot est prêt et connecté !")
 
-    channel_id = 1369266741288636527
+    channel_id = 1485042071273213985
     channel = bot.get_channel(channel_id)
     if channel:
         await channel.send("🟢 **(Au boulot !)** Le bot est maintenant en ligne.")
@@ -38,7 +32,7 @@ async def on_ready():
 async def on_member_join(member):
     try:
         print(f"➡️ Nouveau membre : {member}")
-        channel = bot.get_channel(1365790616377757768)
+        channel = bot.get_channel(1486104052050694235)
 
         async with aiohttp.ClientSession() as session:
             async with session.get(str(member.display_avatar.url)) as resp:
@@ -180,35 +174,7 @@ async def barre(ctx):
     await ctx.send("Le TikTok pour faire des lignes droites à la barre 🛞: https://vm.tiktok.com/ZNRHFKx2N/")
 
 
-# ================= REACTION ROLE Ticket =================
-
-@bot.event
-async def on_raw_reaction_add(payload):
-    # ✅ Vérifie le bon salon
-    if payload.channel_id != CHANNEL_ID:
-        return
-
-    # ✅ Vérifie le bon emoji
-    if str(payload.emoji) != EMOJI:
-        return
-
-    guild = bot.get_guild(payload.guild_id)
-
-    # ✅ Sécurisé (évite bug cache)
-    member = guild.get_member(payload.user_id) or await guild.fetch_member(payload.user_id)
-
-    # Ignore les bots
-    if member.bot:
-        return
-
-    role = guild.get_role(ROLE_ID)
-
-    if role:
-        await member.add_roles(role)
-        print(f"✅ Rôle ajouté à {member}")
-    else:
-        print("❌ Rôle introuvable")
-
 # ================= LANCEMENT =================
 
-bot.run(os.environ['DISCORD_TOKEN'])
+async def start_bot():
+    await bot.start(os.environ['DISCORD_TOKEN_2'])
