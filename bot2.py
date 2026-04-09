@@ -38,7 +38,7 @@ async def on_member_join(member):
             async with session.get(str(member.display_avatar.url)) as resp:
                 avatar_bytes = await resp.read()
 
-        background = Image.open("background.png").convert("RGBA")
+        background = Image.open("background2.png").convert("RGBA")
         background = background.resize((800, 250))
 
         avatar = Image.open(io.BytesIO(avatar_bytes)).resize((180, 180)).convert("RGBA")
@@ -58,7 +58,7 @@ async def on_member_join(member):
             draw_obj.text((x, y), text, font=font, fill=fill)
 
         draw_text_with_shadow(draw, (250, 50), f"Bienvenue {member.name} !", font_title)
-        draw_text_with_shadow(draw, (250, 120), "Sur Les Mains Tendues !", font_small)
+        draw_text_with_shadow(draw, (250, 120), "Sur le Guide du Flibusier !", font_small)
 
         with io.BytesIO() as image_binary:
             background.save(image_binary, "PNG")

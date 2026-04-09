@@ -44,7 +44,7 @@ async def on_member_join(member):
             async with session.get(str(member.display_avatar.url)) as resp:
                 avatar_bytes = await resp.read()
 
-        background = Image.open("background.png").convert("RGBA")
+        background = Image.open("background1.png").convert("RGBA")
         background = background.resize((800, 250))
 
         avatar = Image.open(io.BytesIO(avatar_bytes)).resize((180, 180)).convert("RGBA")
