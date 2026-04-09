@@ -1,11 +1,9 @@
 import asyncio
 import bot1
-import bot2
 
 async def main():
-    await asyncio.gather(
-        bot1.start_bot(),
-        bot2.start_bot()
-    )
+    print("🚀 TEST BOT1 ONLY")
+    await bot1.start_bot()
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
