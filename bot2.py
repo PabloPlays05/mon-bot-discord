@@ -175,7 +175,7 @@ async def barre(ctx):
 
 @bot.command()
 async def signaler(ctx):
-    await ctx.send("Tu souhaites soumettre un signalement ? Voici le lien → [(?)](https://forms.gle/XJAFWMwjfMfmF5EGA)")
+    await ctx.send("Tu souhaites soumettre un signalement ? Voici le lien → [(!)](https://forms.gle/XJAFWMwjfMfmF5EGA)")
 
 # ================= LANCEMENT =================
 
