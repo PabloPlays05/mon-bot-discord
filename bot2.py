@@ -173,6 +173,9 @@ async def rituel(ctx):
 async def barre(ctx):
     await ctx.send("Le TikTok pour faire des lignes droites à la barre 🛞: https://vm.tiktok.com/ZNRHFKx2N/")
 
+@bot.command()
+async def singaler(ctx):
+    await ctx.send("Tu souhaites soumettre un signalement ? Voici le lien → [(?)](https://forms.gle/XJAFWMwjfMfmF5EGA)")
 
 # ================= LANCEMENT =================
 
