@@ -209,6 +209,59 @@ async def on_raw_reaction_add(payload):
     else:
         print("❌ Rôle introuvable")
 
+# ================= ANTI DISCORD INVITE =================
+
+LOG_CHANNEL_ID = 1443311596595052614  # Salon logs
+
+# 🔒 Rôles ignorés
+IGNORED_ROLE_IDS = [
+    1366128711786561747,  # rôle 1 (modération)
+    1412381150055235594,  # rôle 2 (staff)
+    1383114368031658035   # rôle 3 (VIP)
+]
+
+@bot.event
+async def on_message(message):
+    # Ignore les bots
+    if message.author.bot:
+        return
+
+    # Ignore les membres avec certains rôles
+    if any(role.id in IGNORED_ROLE_IDS for role in message.author.roles):
+        await bot.process_commands(message)
+        return
+
+    # Liste des liens interdits
+    discord_links = [
+        "discord.gg/",
+
+    ]
+
+    # Vérifie si le message contient un lien Discord
+    if any(link in message.content.lower() for link in discord_links):
+
+        try:
+            # Supprime le message
+            await message.delete()
+
+            # Salon logs
+            log_channel = bot.get_channel(LOG_CHANNEL_ID)
+
+            if log_channel:
+                await log_channel.send(
+                    f"🚨 {message.author.mention} a envoyé un lien Discord supprimé automatiquement.\n"
+                    f"📌 Message : {message.content}"
+                )
+
+            print(f"✅ Lien Discord supprimé envoyé par {message.author}")
+
+        except Exception as e:
+            print(f"❌ Erreur anti-link : {e}")
+
+    # Garde les commandes actives
+    await bot.process_commands(message)
+
+
 # ================= LANCEMENT =================
 
 async def start_bot():

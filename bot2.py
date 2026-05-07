@@ -218,7 +218,7 @@ async def on_message(message):
             if log_channel:
                 await log_channel.send(
                     f"🚨 {message.author.mention} a envoyé un lien Discord supprimé automatiquement.\n"
-                    f"📌 Message : `{message.content}`"
+                    f"📌 Message : {message.content}"
                 )
 
             print(f"✅ Lien Discord supprimé envoyé par {message.author}")
