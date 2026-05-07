@@ -177,6 +177,58 @@ async def barre(ctx):
 async def signaler(ctx):
     await ctx.send("Tu souhaites soumettre un signalement ? Voici le lien → [(!)](https://forms.gle/XJAFWMwjfMfmF5EGA)")
 
+# ================= ANTI DISCORD INVITE =================
+
+LOG_CHANNEL_ID = 1496918827177611315  # Salon logs
+
+# 🔒 Rôles ignorés
+IGNORED_ROLE_IDS = [
+    1485071193617993869,  # rôle 1 
+    1491185264486256772,  # rôle 2 (staff)
+    1491187040165826670   # rôle 3 (ambassadeur)
+]
+
+@bot.event
+async def on_message(message):
+    # Ignore les bots
+    if message.author.bot:
+        return
+
+    # Ignore les membres avec certains rôles
+    if any(role.id in IGNORED_ROLE_IDS for role in message.author.roles):
+        await bot.process_commands(message)
+        return
+
+    # Liste des liens interdits
+    discord_links = [
+        "discord.gg/",
+
+    ]
+
+    # Vérifie si le message contient un lien Discord
+    if any(link in message.content.lower() for link in discord_links):
+
+        try:
+            # Supprime le message
+            await message.delete()
+
+            # Salon logs
+            log_channel = bot.get_channel(LOG_CHANNEL_ID)
+
+            if log_channel:
+                await log_channel.send(
+                    f"🚨 {message.author.mention} a envoyé un lien Discord supprimé automatiquement.\n"
+                    f"📌 Message : `{message.content}`"
+                )
+
+            print(f"✅ Lien Discord supprimé envoyé par {message.author}")
+
+        except Exception as e:
+            print(f"❌ Erreur anti-link : {e}")
+
+    # Garde les commandes actives
+    await bot.process_commands(message)
+
 # ================= LANCEMENT =================
 
 async def start_bot():
