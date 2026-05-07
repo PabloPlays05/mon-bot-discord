@@ -179,7 +179,7 @@ async def signaler(ctx):
 
 # ================= ANTI DISCORD INVITE =================
 
-LOG_CHANNEL_ID = 1496918827177611315  # Salon logs
+LOG_CHANNEL_ID = 1502039827472978183  # Salon logs
 
 # 🔒 Rôles ignorés
 IGNORED_ROLE_IDS = [

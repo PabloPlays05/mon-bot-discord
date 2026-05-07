@@ -211,7 +211,7 @@ async def on_raw_reaction_add(payload):
 
 # ================= ANTI DISCORD INVITE =================
 
-LOG_CHANNEL_ID = 1443311596595052614  # Salon logs
+LOG_CHANNEL_ID = 1502039475772194919  # Salon logs
 
 # 🔒 Rôles ignorés
 IGNORED_ROLE_IDS = [
